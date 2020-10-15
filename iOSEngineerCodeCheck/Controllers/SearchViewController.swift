@@ -97,6 +97,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "Detail", sender: nil)
         index = indexPath.row
+        view.endEditing(true)
     }
     
 }
