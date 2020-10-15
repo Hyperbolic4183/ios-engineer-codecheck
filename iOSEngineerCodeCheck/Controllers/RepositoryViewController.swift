@@ -21,36 +21,42 @@ class RepositoryViewController: UIViewController {
     var searchViewController: SearchViewController!
         
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        let repositoryList = searchViewController.repositryList
+        print("Written in \(searchViewController.index)")
+        print("Written in \(repositoryList[searchViewController.index].stargazers_count ?? 0)")
+        print("Written in \(repositoryList[searchViewController.index].watchers_count ?? 0)")
+        print("Written in \(searchViewController.index)")
+        print("Written in \(searchViewController.index)")
         
-        let repo = searchViewController.repo[searchViewController.idx]
-        
-        languageLabel.text = "Written in \(repo["language"] as? String ?? "")"
-        starsLabel.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        watchersLabel.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        forksLabel.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        issueLabel.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        titleLabel.text = repositoryList[searchViewController.index].full_name
+        languageLabel.text = "\(repositoryList[searchViewController.index].language ?? "")"
+        starsLabel.text = "\(repositoryList[searchViewController.index].stargazers_count ?? 0) stars"
+        watchersLabel.text = "\(repositoryList[searchViewController.index].watchers_count ?? 0) watchers"
+        forksLabel.text = "\(repositoryList[searchViewController.index].forks_count ?? 0) forks"
+        issueLabel.text = "\(repositoryList[searchViewController.index].open_issues ?? 0) open issues"
+//        getImage()
         
     }
     
-    func getImage(){
-        
-        let repo = searchViewController.repo[searchViewController.idx]
-        
-        titleLabel.text = repo["full_name"] as? String
-        
-        if let owner = repo["owner"] as? [String: Any] {
-            if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-                    let img = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.iconImageView.image = img
-                    }
-                }.resume()
-            }
-        }
-        
-    }
+//    func getImage(){
+//
+//        let repo = searchViewController.repo[searchViewController.idx]
+//
+//        titleLabel.text = repo["full_name"] as? String
+//
+//        if let owner = repo["owner"] as? [String: Any] {
+//            if let imgURL = owner["avatar_url"] as? String {
+//                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
+//                    let img = UIImage(data: data!)!
+//                    DispatchQueue.main.async {
+//                        self.iconImageView.image = img
+//                    }
+//                }.resume()
+//            }
+//        }
+//
+//    }
     
 }

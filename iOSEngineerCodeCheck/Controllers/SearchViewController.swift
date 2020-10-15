@@ -13,14 +13,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
-    var repo: [[String: Any]]=[]
-    
-    //var task: URLSessionTask?
-    var url: String!
-    var idx: Int!
-    
-    var repositoryList : [(full_name: String, name: String)] = []
-    
+    var repositoryNameList : [String] = []
+    var repositryList: [RequestJson] = []
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,19 +47,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             let task = session.dataTask(with: request, completionHandler: { (data, response, error ) in
                 session.finishTasksAndInvalidate()
-                
                 do {
                     let decoder = JSONDecoder()
                     let json = try decoder.decode(ResultJson.self, from: data!)
+                    
                     print(json)
+                    self.repositryList = json.items ?? []
                     if let items = json.items {
-                        self.repositoryList.removeAll()
+                        self.repositoryNameList.removeAll()
                         for item in items {
-                            if let full_name = item.full_name,
-                               let name = item.full_name {
-                               let repository = (full_name, name)
-                               self.repositoryList.append(repository)
-                            print(self.repositoryList)
+                            if let full_name = item.full_name {
+                               self.repositoryNameList.append(full_name)
+                            print(self.repositoryNameList)
                             }
                         }
                         self.tableView.reloadData()
@@ -85,21 +79,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             let dtl = segue.destination as! RepositoryViewController
             dtl.searchViewController = self
         }
-        
     }
-    
-
-    
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoryList.count
+        return repositoryNameList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
-        cell.textLabel?.text = repositoryList[indexPath.row].full_name
+        cell.textLabel?.text = repositoryNameList[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Detail", sender: nil)
+        index = indexPath.row
+    }
+    
 }

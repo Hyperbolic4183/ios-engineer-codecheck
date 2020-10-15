@@ -15,7 +15,11 @@ struct RequestJson: Codable {
     let watchers_count: Int?
     let forks_count: Int?
     let open_issues: Int?
+    let owner: Owner
     
+    struct Owner: Codable {
+        var avatar_url: String?
+    }
 }
 
 struct ResultJson: Codable {
