@@ -23,12 +23,9 @@ class RepositoryViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         let repositoryList = searchViewController.repositryList
-        print("Written in \(searchViewController.index)")
-        print("Written in \(repositoryList[searchViewController.index].stargazers_count ?? 0)")
-        print("Written in \(repositoryList[searchViewController.index].watchers_count ?? 0)")
-        print("Written in \(searchViewController.index)")
-        print("Written in \(searchViewController.index)")
+        let image: UIImage = UIImage(url: repositoryList[searchViewController.index].owner.avatar_url ?? "")
         
         titleLabel.text = repositoryList[searchViewController.index].full_name
         languageLabel.text = "\(repositoryList[searchViewController.index].language ?? "")"
@@ -36,27 +33,22 @@ class RepositoryViewController: UIViewController {
         watchersLabel.text = "\(repositoryList[searchViewController.index].watchers_count ?? 0) watchers"
         forksLabel.text = "\(repositoryList[searchViewController.index].forks_count ?? 0) forks"
         issueLabel.text = "\(repositoryList[searchViewController.index].open_issues ?? 0) open issues"
-//        getImage()
+        iconImageView.image = image
         
     }
     
-//    func getImage(){
-//
-//        let repo = searchViewController.repo[searchViewController.idx]
-//
-//        titleLabel.text = repo["full_name"] as? String
-//
-//        if let owner = repo["owner"] as? [String: Any] {
-//            if let imgURL = owner["avatar_url"] as? String {
-//                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-//                    let img = UIImage(data: data!)!
-//                    DispatchQueue.main.async {
-//                        self.iconImageView.image = img
-//                    }
-//                }.resume()
-//            }
-//        }
-//
-//    }
-    
+}
+
+extension UIImage {
+    public convenience init(url: String) {
+        let url = URL(string: url)
+        do {
+            let data = try Data(contentsOf: url!)
+            self.init(data: data)!
+            return
+        } catch let err {
+            print("Error : \(err.localizedDescription)")
+        }
+        self.init()
+    }
 }
