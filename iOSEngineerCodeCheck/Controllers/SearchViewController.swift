@@ -24,6 +24,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.keyboardDismissMode = .onDrag
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
