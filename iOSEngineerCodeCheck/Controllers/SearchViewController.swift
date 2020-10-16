@@ -16,6 +16,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var repositoryNameList : [String] = []
     var repositryList: [RequestJson] = []
     var index = 0
+    let repositoryViewController = RepositoryViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +81,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             let dtl = segue.destination as! RepositoryViewController
             dtl.searchViewController = self
         }
+        
+        
     }
 }
 
@@ -98,6 +101,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "Detail", sender: nil)
         index = indexPath.row
+        repositoryViewController.ripositoryTitle = repositoryNameList[index] 
         view.endEditing(true)
     }
     

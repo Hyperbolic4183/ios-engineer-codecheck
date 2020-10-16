@@ -17,13 +17,18 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issueLabel: UILabel!
+    @IBOutlet weak var favoriteSwitch: UISwitch!
+    @IBOutlet weak var gotoSafariButton: UIButton!
     
     var searchViewController: SearchViewController!
+    var favoriteBool = false
+    var ripositoryTitle = ""//リポジトリを一意に定めるもの
         
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        print(ripositoryTitle)
+        favoritedJudge()
         let repositoryList = searchViewController.repositryList
         let image: UIImage = UIImage(url: repositoryList[searchViewController.index].owner.avatar_url ?? "")
         
@@ -36,6 +41,23 @@ class RepositoryViewController: UIViewController {
         iconImageView.image = image
         
     }
+    //お気に入りに追加されたものの中に含まれていた時,favoriteBoolをtrueにする関数
+    func favoritedJudge() {
+        
+    }
+    
+    
+    
+    @IBAction func favoriteSwitch(_ sender: Any) {
+        
+    }
+    
+    @IBAction func gotoSafariButton(_ sender: Any) {
+        
+    }
+    
+    
+    
     
 }
 
