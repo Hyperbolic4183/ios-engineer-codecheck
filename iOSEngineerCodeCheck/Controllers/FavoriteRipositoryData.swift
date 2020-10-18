@@ -9,8 +9,9 @@
 import RealmSwift
 
 class FavoriteRipository: Object {
+    @objc dynamic var id = 0
     @objc dynamic var repository = ""
     override static func primaryKey() -> String? {
-        return "repository"
+        return "id"
     }
 }
