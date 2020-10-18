@@ -72,6 +72,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                 )
             task.resume()
             }
+        
         view.endEditing(true)
     }
     
@@ -84,6 +85,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         
     }
+    
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -101,8 +103,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "Detail", sender: nil)
         index = indexPath.row
-        repositoryViewController.ripositoryTitle = repositoryNameList[index] 
         view.endEditing(true)
     }
+    
+    
     
 }

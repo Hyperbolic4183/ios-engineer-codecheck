@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RepositoryViewController: UIViewController {
+    
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,19 +19,23 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issueLabel: UILabel!
-    @IBOutlet weak var favoriteSwitch: UISwitch!
     @IBOutlet weak var gotoSafariButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var searchViewController: SearchViewController!
-    var favoriteBool = false
     var ripositoryTitle = ""//リポジトリを一意に定めるもの
-        
+    
+    let realm = try! Realm()
+    var favoriteRipository = FavoriteRipository()
+    var favoriteRipositoryArray = try! Realm().objects(FavoriteRipository.self)
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print(ripositoryTitle)
-        favoritedJudge()
+        
         let repositoryList = searchViewController.repositryList
+        ripositoryTitle = repositoryList[searchViewController.index].full_name ?? ""
+        print("タイトルは\(ripositoryTitle)")
         let image: UIImage = UIImage(url: repositoryList[searchViewController.index].owner.avatar_url ?? "")
         
         titleLabel.text = repositoryList[searchViewController.index].full_name
@@ -39,18 +45,44 @@ class RepositoryViewController: UIViewController {
         forksLabel.text = "\(repositoryList[searchViewController.index].forks_count ?? 0) forks"
         issueLabel.text = "\(repositoryList[searchViewController.index].open_issues ?? 0) open issues"
         iconImageView.image = image
-        
+        favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     //お気に入りに追加されたものの中に含まれていた時,favoriteBoolをtrueにする関数
     func favoritedJudge() {
         
     }
     
-    
-    
-    @IBAction func favoriteSwitch(_ sender: Any) {
-        
+    @IBAction func favoriteButton(_ sender: Any) {
+        favoriteButton.isSelected = !favoriteButton.isSelected
+        print(favoriteButton.isSelected)
+        favoriteButtonImage()
     }
+    
+    func favoriteButtonImage() {
+        let favoriteRepository = FavoriteRipository()
+        favoriteRepository.repository = ripositoryTitle
+        if favoriteButton.isSelected {
+            print("いいね")
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            try! realm.write {
+                self.favoriteRipository.repository = ripositoryTitle
+                
+                self.realm.add(self.favoriteRipository, update: .modified)
+                print("配列の数は\(favoriteRipositoryArray.count)")
+                print("配列は\(favoriteRipositoryArray)")
+                
+            }
+        } else {
+            print("キャンセル")
+//
+//            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//            try! realm.write {
+//                self.realm.delete(favoriteRepository)
+//                print("お気に入りリストから削除")
+//            }
+        }
+    }
+    
     
     @IBAction func gotoSafariButton(_ sender: Any) {
         
