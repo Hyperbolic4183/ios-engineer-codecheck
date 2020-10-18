@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteRipositoriesTableTableViewController: UITableViewController {
-
+    
     
     @IBOutlet var favoritetableView: UITableView!
     let repositoryViewController = RepositoryViewController()
@@ -24,11 +24,11 @@ class FavoriteRipositoriesTableTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return repositoryViewController.favoriteRipositoryArray.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        
         cell.textLabel?.text = "あい"
         return cell
     }

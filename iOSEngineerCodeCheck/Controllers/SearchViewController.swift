@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
@@ -18,7 +18,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var index = 0
     let repositoryViewController = RepositoryViewController()
     
-    override func viewDidLoad() {
+    override func viewDidLoad()       {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         searchBar.placeholder = "リポジトリ名を入力してください。"
@@ -46,34 +46,36 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             print("\(requestURL)をリクエストした")
             let request = URLRequest(url: requestURL)
             let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-            
-            let task = session.dataTask(with: request, completionHandler: { (data, response, error ) in
+            let task = session.dataTask(with: request, completionHandler: { [self] (data, response, error ) in
                 session.finishTasksAndInvalidate()
                 do {
-                    let decoder = JSONDecoder()
-                    let json = try decoder.decode(ResultJson.self, from: data!)
-                    
-                    print(json)
-                    self.repositryList = json.items ?? []
-                    if let items = json.items {
-                        self.repositoryNameList.removeAll()
-                        for item in items {
-                            if let full_name = item.full_name {
-                               self.repositoryNameList.append(full_name)
-                            print(self.repositoryNameList)
-                            }
-                        }
-                        self.tableView.reloadData()
-                      }
-                  } catch {
+                    searchRipository(data: data)
+                } catch {
                     print(("エラーが出ました\(error)"))
-                  }
                 }
-                )
-            task.resume()
             }
+            )
+            task.resume()
+        }
         
         view.endEditing(true)
+    }
+    
+    func searchRipository(data: Data?) {
+        let decoder = JSONDecoder()
+        let json = try! decoder.decode(ResultJson.self, from: data!)
+        print(json)
+        self.repositryList = json.items ?? []
+        if let items = json.items {
+            self.repositoryNameList.removeAll()
+            for item in items {
+                if let full_name = item.full_name {
+                    self.repositoryNameList.append(full_name)
+                    print(self.repositoryNameList)
+                }
+            }
+            self.tableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
