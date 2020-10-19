@@ -8,6 +8,7 @@
 
 import Foundation
 
+//取得するAPIデータベース
 struct RequestJson: Codable {
     let full_name: String?
     let language: String?
