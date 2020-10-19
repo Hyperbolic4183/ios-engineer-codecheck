@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
@@ -27,6 +27,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         tableView.keyboardDismissMode = .onDrag
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Detail"{
+            let dtl = segue.destination as! RepositoryViewController
+            dtl.searchViewController = self
+        }
+    }
+    
+}
+
+
+extension SearchViewController: UISearchBarDelegate {
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
@@ -40,15 +52,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
         view.endEditing(true)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
-            let dtl = segue.destination as! RepositoryViewController
-            dtl.searchViewController = self
-        }
-    }
-    
 }
+
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     //TableViewの設定

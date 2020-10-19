@@ -11,7 +11,6 @@ import RealmSwift
 
 class RepositoryViewController: UIViewController {
     
-    
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
@@ -20,15 +19,11 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issueLabel: UILabel!
     
-    var searchViewController: SearchViewController!//()にすると無限ループになって落ちる
-    var ripositoryTitle = ""//リポジトリを一意に定めるもの
-    
+    var searchViewController: SearchViewController!
     
     override func viewDidLoad() {//メモリリーク起きてる
         super.viewDidLoad()
         let repositoryList = searchViewController.repositryList
-        ripositoryTitle = repositoryList[searchViewController.index].full_name ?? ""
-        print("タイトルは\(ripositoryTitle)")//テスト
         let image: UIImage = UIImage(url: repositoryList[searchViewController.index].owner.avatar_url ?? "")
         titleLabel.text = repositoryList[searchViewController.index].full_name
         languageLabel.text = "\(repositoryList[searchViewController.index].language ?? "")"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension SearchViewController{
+extension SearchViewController {
     func test(searchWord: String) {
         guard let requestURL = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         print("\(requestURL)をリクエストした")
@@ -35,10 +35,9 @@ extension SearchViewController{
         self.repositryList = json.items ?? []
         if let items = json.items {
             self.repositoryNameList.removeAll()
-            for item in items {
-                if let full_name = item.full_name {
+            items.forEach {
+                if let full_name = $0.full_name {
                     self.repositoryNameList.append(full_name)
-                    print(self.repositoryNameList)
                 }
             }
         }
