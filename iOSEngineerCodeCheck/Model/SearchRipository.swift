@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 extension SearchViewController {
-    func test(searchWord: String) {
+    func searchRepository(searchWord: String) {
+        SVProgressHUD.show()
         guard let requestURL = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         print("\(requestURL)をリクエストした")
         let request = URLRequest(url: requestURL)
@@ -17,9 +19,11 @@ extension SearchViewController {
         let task = session.dataTask(with: request, completionHandler: { [self] (data, response, error ) in
             session.finishTasksAndInvalidate()
             do {
-                try searchRipository(data: data)
+                try getAPI(data: data)
+                SVProgressHUD.dismiss()
                 tableView?.reloadData()
             } catch {
+                SVProgressHUD.showError(withStatus: "エラーが発生しました。")
                 print(("エラーが出ました\(error)"))
             }
         }
@@ -27,8 +31,8 @@ extension SearchViewController {
         task.resume()
     }
     
-    //取得したjsonデータをdecodeし,そこに含まれているfull_nameを格納し,tableViewを更新する関数
-    func searchRipository(data: Data?) throws {
+    //取得したjsonデータをdecodeし,そこに含まれているfull_nameを格納する関数
+    func getAPI(data: Data?) throws {
         let decoder = JSONDecoder()
         let json = try decoder.decode(ResultJson.self, from: data!)
         print(json)//テスト

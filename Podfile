@@ -7,6 +7,7 @@ target 'iOSEngineerCodeCheck' do
 
   # Pods for iOSEngineerCodeCheck
 pod 'RealmSwift','5.1.0'
+pod 'SVProgressHUD'
 
   target 'iOSEngineerCodeCheckTests' do
     inherit! :search_paths

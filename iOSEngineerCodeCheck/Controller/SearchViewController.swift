@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SearchViewController: UIViewController {
     
@@ -48,7 +49,9 @@ extension SearchViewController: UISearchBarDelegate {
     //Enterを押した時の動き
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchWord = searchBar.text {
-            test(searchWord: searchWord)
+            searchRepository(searchWord: searchWord)
+        } else {
+            SVProgressHUD.showError(withStatus: "リポジトリを名を入力してください。")
         }
         view.endEditing(true)
     }
