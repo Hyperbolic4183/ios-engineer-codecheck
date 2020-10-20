@@ -34,7 +34,6 @@ class SearchViewController: UIViewController {
             dtl.searchViewController = self
         }
     }
-    
 }
 
 
@@ -71,8 +70,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //選択されたセルのハイライトを解除
+        tableView.deselectRow(at: indexPath, animated: true)
+        //画面遷移
         performSegue(withIdentifier: "Detail", sender: nil)
         index = indexPath.row
+        //キーボードを閉じる
         view.endEditing(true)
     }
 }
