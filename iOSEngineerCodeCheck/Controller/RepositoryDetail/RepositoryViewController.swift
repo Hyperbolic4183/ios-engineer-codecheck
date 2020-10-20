@@ -10,7 +10,9 @@ import UIKit
 import RealmSwift
 import SVProgressHUD
 
+
 class RepositoryViewController: UIViewController {
+    var searchViewController: SearchViewController!
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,8 +21,6 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issueLabel: UILabel!
-    
-    var searchViewController: SearchViewController!
     
     override func viewDidLoad() {//メモリリーク起きてる
         super.viewDidLoad()

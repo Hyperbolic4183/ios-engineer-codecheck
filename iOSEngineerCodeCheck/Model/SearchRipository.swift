@@ -1,5 +1,5 @@
 //
-//  SearchRipository.swift
+//  SearchRepository.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by 大塚周 on 2020/10/19.
@@ -10,7 +10,10 @@ import UIKit
 import SVProgressHUD
 
 extension SearchViewController {
+    
+    //SearchBarに入力された単語をURLに入れ,検索し,TableViewを更新する関数
     func searchRepository(searchWord: String) {
+        //インジケータの表示
         SVProgressHUD.show()
         guard let requestURL = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         print("\(requestURL)をリクエストした")
@@ -20,6 +23,7 @@ extension SearchViewController {
             session.finishTasksAndInvalidate()
             do {
                 try getAPI(data: data)
+                //インジケータの消去
                 SVProgressHUD.dismiss()
                 tableView?.reloadData()
             } catch {
