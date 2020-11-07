@@ -12,7 +12,6 @@
 		470A586D2536F3AF00AF2DD8 /* RepositoryJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A586C2536F3AF00AF2DD8 /* RepositoryJSONData.swift */; };
 		477BD8B3253D52E70028BE8D /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BD8B2253D52E70028BE8D /* UIImageExtension.swift */; };
 		477BD8B8253D53F90028BE8D /* SearchRipository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BD8B7253D53F90028BE8D /* SearchRipository.swift */; };
-		477BD8CA253E8CA80028BE8D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BD8C9253E8CA80028BE8D /* TableViewController.swift */; };
 		477BD8D2253E8CE30028BE8D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BD8D1253E8CE30028BE8D /* SearchBar.swift */; };
 		B49F89B7CD232900DFA4B9D3 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9004C20B4B39E353AEBFA0 /* Pods_iOSEngineerCodeCheck.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */; };
@@ -49,7 +48,6 @@
 		470A586C2536F3AF00AF2DD8 /* RepositoryJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryJSONData.swift; sourceTree = "<group>"; };
 		477BD8B2253D52E70028BE8D /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		477BD8B7253D53F90028BE8D /* SearchRipository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRipository.swift; sourceTree = "<group>"; };
-		477BD8C9253E8CA80028BE8D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		477BD8D1253E8CE30028BE8D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		52E1241DE75113D5ADAFEEEA /* Pods-iOSEngineerCodeCheck.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck.release.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck/Pods-iOSEngineerCodeCheck.release.xcconfig"; sourceTree = "<group>"; };
 		7F9004C20B4B39E353AEBFA0 /* Pods_iOSEngineerCodeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
-				477BD8C9253E8CA80028BE8D /* TableViewController.swift */,
 				477BD8D1253E8CE30028BE8D /* SearchBar.swift */,
 			);
 			path = SearchViewController;
@@ -464,7 +461,6 @@
 				BFD945E3244DC5E80012785A /* SearchViewController.swift in Sources */,
 				477BD8B8253D53F90028BE8D /* SearchRipository.swift in Sources */,
 				477BD8B3253D52E70028BE8D /* UIImageExtension.swift in Sources */,
-				477BD8CA253E8CA80028BE8D /* TableViewController.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepositoryViewController.swift in Sources */,
 				477BD8D2253E8CE30028BE8D /* SearchBar.swift in Sources */,
 				470A586D2536F3AF00AF2DD8 /* RepositoryJSONData.swift in Sources */,

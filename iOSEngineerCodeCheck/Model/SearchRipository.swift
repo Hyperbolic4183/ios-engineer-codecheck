@@ -39,15 +39,10 @@ extension SearchViewController {
     func getAPI(data: Data?) throws {
         let decoder = JSONDecoder()
         let json = try decoder.decode(ResultJson.self, from: data!)
-        print(json)//テスト
         self.repositryList = json.items ?? []
         if let items = json.items {
-            self.repositoryNameList.removeAll()
-            items.forEach {
-                if let full_name = $0.full_name {
-                    self.repositoryNameList.append(full_name)
-                }
-            }
+            self.repositryList.removeAll()
+            self.repositryList.append(contentsOf: items)
         }
     }
 }
