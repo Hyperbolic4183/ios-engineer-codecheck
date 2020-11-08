@@ -15,7 +15,12 @@ extension SearchViewController {
     func searchRepository(searchWord: String) {
         //インジケータの表示
         SVProgressHUD.show()
-        guard let requestURL = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
+        guard let requestURL = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
+            print("URL生成失敗")
+            //インジケータの消去
+            SVProgressHUD.showError(withStatus: "英数字を入力してください")
+            return
+        }
         print("\(requestURL)をリクエストした")
         let request = URLRequest(url: requestURL)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -26,6 +31,9 @@ extension SearchViewController {
                 //インジケータの消去
                 SVProgressHUD.dismiss()
                 tableView?.reloadData()
+                if repositryList.isEmpty {
+                    SVProgressHUD.showError(withStatus: "リポジトリが見つかりませんでした")
+                }
             } catch {
                 SVProgressHUD.showError(withStatus: "エラーが発生しました。")
                 print(("エラーが出ました\(error)"))

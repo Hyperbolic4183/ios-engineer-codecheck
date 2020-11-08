@@ -51,8 +51,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("indexは\(index)")
-        print("indexPath.rowは\(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
         cell.textLabel?.text = repositryList[indexPath.row].full_name
         return cell
